@@ -74,4 +74,23 @@ public class DishController {
         dishDtoPage.setRecords(list);
         return R.success(dishDtoPage);
     }
+
+    @GetMapping("/{id}")
+    public R<DishDto> get(@PathVariable Long id) {
+        DishDto dishDto = dishService.getByIdWithFlavor(id);
+        return R.success(dishDto);
+    }
+    @PutMapping
+    public R<String> update(@RequestBody DishDto dishDto) {
+        log.info(dishDto.toString());
+        dishService.updateWithFlavor(dishDto);
+        return R.success("修改菜品成功");
+    }
+    @DeleteMapping
+    public R<String> delete(Long ids) {
+        log.info("删除菜品，id为：{}", ids);
+        dishService.removeById(ids);
+        return R.success("菜品信息删除成功");
+    }
+
 }
