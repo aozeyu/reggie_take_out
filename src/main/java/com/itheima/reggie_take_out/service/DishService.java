@@ -11,4 +11,5 @@ import com.itheima.reggie_take_out.entity.Dish;
  * @date: 2022-06-30 15:22
  **/
 public interface DishService extends IService<Dish> {
+
 }
