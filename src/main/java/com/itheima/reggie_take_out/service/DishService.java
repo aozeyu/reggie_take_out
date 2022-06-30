@@ -2,6 +2,7 @@ package com.itheima.reggie_take_out.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.itheima.reggie_take_out.entity.Dish;
+import com.itheima.reggie_take_out.entity.DishDto;
 
 /**
  * @program: reggie_take_out
@@ -12,4 +13,5 @@ import com.itheima.reggie_take_out.entity.Dish;
  **/
 public interface DishService extends IService<Dish> {
 
+   public void saveWithFlavor(DishDto dishDto);
 }
