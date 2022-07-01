@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.itheima.reggie_take_out.entity.Setmeal;
 import com.itheima.reggie_take_out.entity.SetmealDto;
 
+import java.util.List;
+
 /**
  * @program: reggie_take_out
  * @description: 333
@@ -13,4 +15,5 @@ import com.itheima.reggie_take_out.entity.SetmealDto;
  **/
 public interface SetmealService extends IService<Setmeal> {
   public void saveWithDish(SetmealDto setmealDto);
+  public void removeWithDish(List<Long> ids);
 }

@@ -1,6 +1,8 @@
 package com.itheima.reggie_take_out.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.itheima.reggie_take_out.common.CustomException;
 import com.itheima.reggie_take_out.entity.Setmeal;
 import com.itheima.reggie_take_out.entity.SetmealDish;
 import com.itheima.reggie_take_out.entity.SetmealDto;
@@ -38,5 +40,21 @@ public class SetmealServiceImpl extends ServiceImpl<SetmealMapper, Setmeal> impl
             return item;
         }).collect(Collectors.toList());
         setmealDishService.saveBatch(setmealDishes);
+    }
+
+    @Transactional
+    @Override
+    public void removeWithDish(List<Long> ids) {
+        LambdaQueryWrapper<Setmeal> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.in(Setmeal::getId,ids);
+        queryWrapper.eq(Setmeal::getStatus,1);
+        int count = this.count(queryWrapper);
+        if (count > 0) {
+            throw  new CustomException("套餐正在售卖中，不能删除");
+        }
+        this.removeByIds(ids);
+        LambdaQueryWrapper<SetmealDish> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.in(SetmealDish::getSetmealId,ids);
+        setmealDishService.remove(lambdaQueryWrapper);
     }
 }

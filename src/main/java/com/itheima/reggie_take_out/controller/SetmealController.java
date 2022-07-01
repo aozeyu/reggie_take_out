@@ -34,6 +34,7 @@ public class SetmealController {
     private SetmealDishService setmealDishService;
     @Autowired
     private CategoryService categoryService;
+
     @PostMapping
     public R<String> save(@RequestBody SetmealDto setmealDto) {
         log.info("套餐信息: {}", setmealDto);
@@ -49,7 +50,7 @@ public class SetmealController {
         queryWrapper.like(name != null, Setmeal::getName, name);
         queryWrapper.orderByDesc(Setmeal::getUpdateTime);
         setmealService.page(pageInfo, queryWrapper);
-        BeanUtils.copyProperties(pageInfo, dtoPage,"records");
+        BeanUtils.copyProperties(pageInfo, dtoPage, "records");
         List<Setmeal> records = pageInfo.getRecords();
         List<SetmealDto> list = records.stream().map((item) -> {
             SetmealDto setmealDto = new SetmealDto();
@@ -65,6 +66,12 @@ public class SetmealController {
         }).collect(Collectors.toList());
         dtoPage.setRecords(list);
         return R.success(dtoPage);
+    }
 
+    @DeleteMapping
+    public R<String> delete(@RequestParam List<Long> ids) {
+        log.info("ids:{}", ids);
+        setmealService.removeWithDish(ids);
+        return R.success("套餐删除成功");
     }
 }
