@@ -27,6 +27,7 @@ public class ShoppingCartController {
     private ShoppingCartService shoppingCartService;
 
     @PostMapping("/add")
+    @CrossOrigin
     public R<ShoppingCart> add(@RequestBody ShoppingCart shoppingCart){
         log.info("购物车数据:{}",shoppingCart);
 
@@ -70,6 +71,7 @@ public class ShoppingCartController {
      * @return
      */
     @GetMapping("/list")
+    @CrossOrigin
     public R<List<ShoppingCart>> list(){
         log.info("查看购物车...");
 
@@ -87,6 +89,7 @@ public class ShoppingCartController {
      * @return
      */
     @DeleteMapping("/clean")
+    @CrossOrigin
     public R<String> clean(){
         //SQL:delete from shopping_cart where user_id = ?
         LambdaQueryWrapper<ShoppingCart> queryWrapper = new LambdaQueryWrapper<>();

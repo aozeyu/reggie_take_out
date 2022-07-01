@@ -3,10 +3,7 @@ package com.itheima.reggie_take_out.controller;
 import com.itheima.reggie_take_out.common.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletOutputStream;
@@ -37,6 +34,7 @@ public class CommonController {
      * @return
      */
     @PostMapping("/upload")
+    @CrossOrigin
     public R<String> upload(MultipartFile file) {
         //file是一个临时文件，需要转存到指定位置，否则本次请求完成后临时文件会删除
         log.info(file.toString());
@@ -66,6 +64,7 @@ public class CommonController {
     }
 
     @GetMapping("/download")
+    @CrossOrigin
     public void download(String name, HttpServletResponse response) {
         try {
             //输入流，通过输入流读取文件内容

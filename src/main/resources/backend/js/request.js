@@ -3,8 +3,8 @@
   // 创建axios实例
   const service = axios.create({
     // axios中请求配置有baseURL选项，表示请求URL公共部分
-    baseURL: '/',
-    // 超时
+    baseURL: 'http://47.111.131.185:8080',
+    // 超时CorsConfig
     timeout: 1000000
   })
   // request拦截器

@@ -30,6 +30,7 @@ public class AddressBookController {
      * 新增
      */
     @PostMapping
+    @CrossOrigin
     public R<AddressBook> save(@RequestBody AddressBook addressBook) {
         addressBook.setUserId(BaseContext.getCurrentId());
         log.info("addressBook:{}", addressBook);
@@ -41,6 +42,7 @@ public class AddressBookController {
      * 设置默认地址
      */
     @PutMapping("default")
+    @CrossOrigin
     public R<AddressBook> setDefault(@RequestBody AddressBook addressBook) {
         log.info("addressBook:{}", addressBook);
         LambdaUpdateWrapper<AddressBook> wrapper = new LambdaUpdateWrapper<>();
@@ -58,6 +60,7 @@ public class AddressBookController {
      * 根据id查询地址
      */
     @GetMapping("/{id}")
+    @CrossOrigin
     public R get(@PathVariable Long id) {
         AddressBook addressBook = addressBookService.getById(id);
         if (addressBook != null) {
@@ -71,6 +74,7 @@ public class AddressBookController {
      * 查询默认地址
      */
     @GetMapping("default")
+    @CrossOrigin
     public R<AddressBook> getDefault() {
         LambdaQueryWrapper<AddressBook> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(AddressBook::getUserId, BaseContext.getCurrentId());
@@ -89,6 +93,7 @@ public class AddressBookController {
      * 查询指定用户的全部地址
      */
     @GetMapping("/list")
+    @CrossOrigin
     public R<List<AddressBook>> list(AddressBook addressBook) {
         addressBook.setUserId(BaseContext.getCurrentId());
         log.info("addressBook:{}", addressBook);

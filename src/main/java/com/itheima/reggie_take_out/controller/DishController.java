@@ -34,6 +34,7 @@ public class DishController {
     private DishFlavorService dishFlavorService;
 
     @PostMapping
+    @CrossOrigin
     public R<String> save(@RequestBody DishDto dishDto) {
         log.info(dishDto.toString());
         dishService.saveWithFlavor(dishDto);
@@ -42,6 +43,7 @@ public class DishController {
     }
 
     @GetMapping("/page")
+    @CrossOrigin
     public R<Page> page(int page, int pageSize, String name) {
         Page<Dish> pageInfo = new Page<>(page, pageSize);
         Page<DishDto> dishDtoPage = new Page<>();
@@ -74,12 +76,14 @@ public class DishController {
     }
 
     @GetMapping("/{id}")
+    @CrossOrigin
     public R<DishDto> get(@PathVariable Long id) {
         DishDto dishDto = dishService.getByIdWithFlavor(id);
         return R.success(dishDto);
     }
 
     @PutMapping
+    @CrossOrigin
     public R<String> update(@RequestBody DishDto dishDto) {
         log.info(dishDto.toString());
         dishService.updateWithFlavor(dishDto);
@@ -87,6 +91,7 @@ public class DishController {
     }
 
     @DeleteMapping
+    @CrossOrigin
     public R<String> delete(Long ids) {
         log.info("删除菜品，id为：{}", ids);
         dishService.removeById(ids);
@@ -103,6 +108,7 @@ public class DishController {
 //        return R.success(list);
 //    }
     @GetMapping("/list")
+    @CrossOrigin
     public R<List<DishDto>> list(Dish dish) {
         //构造查询条件
         LambdaQueryWrapper<Dish> queryWrapper = new LambdaQueryWrapper<>();

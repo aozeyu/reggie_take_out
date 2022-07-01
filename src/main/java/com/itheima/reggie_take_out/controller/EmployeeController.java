@@ -29,6 +29,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @PostMapping("login")
+    @CrossOrigin
     public R<Employee> login(HttpServletRequest request, @RequestBody Employee employee) {
         String password = employee.getPassword();
         password = DigestUtils.md5DigestAsHex(password.getBytes());
@@ -50,12 +51,14 @@ public class EmployeeController {
         return R.success(emp);
     }
     @PostMapping("/logout")
+    @CrossOrigin
     public R<String> logout(HttpServletRequest request) {
         request.getSession().removeAttribute("employee");
         return R.success("退出成功");
     }
 
     @PostMapping
+    @CrossOrigin
     public R<String> save(HttpServletRequest request, @RequestBody Employee employee) {
         log.info("新增员工,员工信息: {}",employee.toString());
         employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));
@@ -70,6 +73,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/page")
+    @CrossOrigin
     public R<Page<Employee>> page(int page, int pageSize, String name) {
         log.info("page = {},pageSize = {},name = {}" ,page,pageSize,name);
         Page<Employee> pageInfo = new Page<>(page, pageSize);
@@ -90,6 +94,7 @@ public class EmployeeController {
 
 
     @GetMapping("/{id}")
+    @CrossOrigin
     public R<Employee> getById(@PathVariable Long id) {
         log.info("根据id查询员工信息...");
         Employee employee = employeeService.getById(id);
@@ -105,6 +110,7 @@ public class EmployeeController {
      * @return
      */
     @PutMapping
+    @CrossOrigin
     public R<String> update(HttpServletRequest request,@RequestBody Employee employee){
         log.info(employee.toString());
 

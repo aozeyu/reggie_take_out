@@ -26,6 +26,7 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @PostMapping
+    @CrossOrigin
     public R<String> save(@RequestBody Category category) {
         log.info("category:{}", category);
         categoryService.save(category);
@@ -33,6 +34,7 @@ public class CategoryController {
     }
 
     @GetMapping("/page")
+    @CrossOrigin
     public R<Page> page(int page, int pageSize) {
         Page<Category> pageInfo = new Page<>(page, pageSize);
         LambdaQueryWrapper<Category> queryWrapper = new LambdaQueryWrapper<>();
@@ -42,6 +44,7 @@ public class CategoryController {
     }
 
     @DeleteMapping
+    @CrossOrigin
     public R<String> delete(Long ids) {
         log.info("删除分类，id为：{}", ids);
         categoryService.remove(ids);
@@ -49,6 +52,7 @@ public class CategoryController {
     }
 
     @PutMapping
+    @CrossOrigin
     public R<String> update(@RequestBody Category category) {
         log.info("修改分类信息：{}", category);
         categoryService.updateById(category);
@@ -56,6 +60,7 @@ public class CategoryController {
     }
 
     @GetMapping("/list")
+    @CrossOrigin
     public R<List<Category>> list(Category category) {
         LambdaQueryWrapper<Category> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(category.getType() != null, Category::getType, category.getType());

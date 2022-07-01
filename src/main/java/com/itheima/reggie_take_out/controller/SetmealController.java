@@ -36,6 +36,7 @@ public class SetmealController {
     private CategoryService categoryService;
 
     @PostMapping
+    @CrossOrigin
     public R<String> save(@RequestBody SetmealDto setmealDto) {
         log.info("套餐信息: {}", setmealDto);
         setmealService.saveWithDish(setmealDto);
@@ -43,6 +44,7 @@ public class SetmealController {
     }
 
     @GetMapping("/page")
+    @CrossOrigin
     public R<Page> page(int page, int pageSize, String name) {
         Page<Setmeal> pageInfo = new Page<>(page, pageSize);
         Page<SetmealDto> dtoPage = new Page<>();
@@ -69,6 +71,7 @@ public class SetmealController {
     }
 
     @DeleteMapping
+    @CrossOrigin
     public R<String> delete(@RequestParam List<Long> ids) {
         log.info("ids:{}", ids);
         setmealService.removeWithDish(ids);
@@ -76,6 +79,7 @@ public class SetmealController {
     }
 
     @GetMapping("/list")
+    @CrossOrigin
     public R<List<Setmeal>> list(Setmeal setmeal) {
         LambdaQueryWrapper<Setmeal> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(setmeal.getCategoryId() != null, Setmeal::getCategoryId, setmeal.getCategoryId());

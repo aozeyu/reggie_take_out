@@ -23,12 +23,14 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
     @PostMapping("/submit")
+    @CrossOrigin
     public R<String> submit(@RequestBody Orders orders) {
         orderService.submit(orders);
         return R.success("下单成功");
     }
 
     @GetMapping("/userPage")
+    @CrossOrigin
     public R<Page> page(int page, int pageSize){
         log.info("页面传递的页数->:{},页面传递的记录数->:{}",page,pageSize);
 
