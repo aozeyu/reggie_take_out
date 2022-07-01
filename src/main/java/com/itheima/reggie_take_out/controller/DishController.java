@@ -6,6 +6,7 @@ import com.itheima.reggie_take_out.common.R;
 import com.itheima.reggie_take_out.entity.Category;
 import com.itheima.reggie_take_out.entity.Dish;
 import com.itheima.reggie_take_out.entity.DishDto;
+import com.itheima.reggie_take_out.entity.SetmealDto;
 import com.itheima.reggie_take_out.service.CategoryService;
 import com.itheima.reggie_take_out.service.DishFlavorService;
 import com.itheima.reggie_take_out.service.DishService;
@@ -104,4 +105,6 @@ public class DishController {
         List<Dish> list = dishService.list(queryWrapper);
         return R.success(list);
     }
+
+
 }
